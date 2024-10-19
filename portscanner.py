@@ -47,8 +47,12 @@ def dependencies(package):
             sys.exit(1)
 
 
-
-import pyfiglet
+try:
+    import pyfiglet
+except ImportError:
+    print("\33[0;49;37mpyfiglet is not installed. Installing pyfiglet...")
+    dependencies("pyfiglet")
+    import pyfiglet
 
 ascii_banner = pyfiglet.figlet_format("KINGCOBR@ PORT SCANNER")
 print(ascii_banner)
@@ -57,6 +61,7 @@ if len(sys.argv) == 2:
 
     target_ip = socket.gethostbyname(sys.argv[1])
 else:
+
     print("\33[0;49;91m Invalid Target !!")
     sys.exit()
 
